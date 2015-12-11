@@ -20,12 +20,13 @@ will only be executed a single time like so:
 
   salt -G 'in_provisioning:True' state.highstate saltenv=provision -l debug
 
-States in other environments run post-provision phase may change settings previously applied.  The
+States in other environments run post-provision phase, may change settings previously applied.  The
 provision phase is not intended to meet the precise requirements of all possible instance types, but rather to
 apply useful defaults that may be extended and overridden from more specific environments and targeting.
 
-While very uncommon, it is ocassionally necessary to re-run an updated provision environment state file.
-If the dnsmasq_cache states are updated for example:
+While very uncommon, it is occasionally necessary to re-run an updated provision environment state file.
+If the dnsmasq_cache states are updated for example and it is desirable to run the updates on any
+hosts matching *.dev.* in the hostname:
 
 ::
 
@@ -42,15 +43,15 @@ Getting Started
   be specified as an argument to the salt or salt-call commands.
 
 + Clone this repository and copy relevant directories to /srv/salt/provision and
-  /srv/pillar/provision
+  /srv/pillar/provision, most likely on a salt master
 
 + Bring up any instances that will be part of the cluster, with recent
-  base Ubuntu installs.
+  base Ubuntu installs preferably.
 
 + Make sure to have a base environment, with an empty top.sls file at a minimum,
   /srv/salt/base and /srv/pillar/base
 
-+ Configure file_roots and pillar_roots, for example:
++ Configure file_roots and pillar_roots (e.g. in /etc/salt/master), for example:
 
 ::
 
@@ -82,7 +83,9 @@ Getting Started
 
 Compound targeting may be useful in some scenarios.
 
-+ Once provisioned, removing the in_provisioning grain is recommended.  This
++ Once provisioned, removing the in_provisioning grain is recommended.  If left
+  in place, any general highstate will run the provision states, which is most
+  likely undesirable.
 
 ::
 
