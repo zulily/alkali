@@ -1,0 +1,6 @@
+{% set postfix = salt['grains.filter_by']({
+    'Debian': {
+        'package_name': 'postfix',
+        'postfix_conf_dir': '/etc/postfix/',
+    },
+}) %}

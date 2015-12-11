@@ -1,0 +1,8 @@
+{% set limits = salt['grains.filter_by']({
+    'Debian': {
+        'limits_conf': '/etc/security/limits.conf',
+        'limits_d': '/etc/security/limits.d/',
+        'limits_conf_src': 'salt://limits/files/limits.conf',
+        'limits_d_conf_src': 'salt://limits/files/limits_d.conf',
+    },
+}) %}

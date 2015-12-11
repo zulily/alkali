@@ -1,0 +1,8 @@
+{% set aliases = salt['grains.filter_by']({
+    'Debian': {
+        'aliases': '/etc/aliases',
+        'newaliases_bin': '/usr/bin/newaliases',
+        'aliases_src': 'salt://aliases/files/aliases',
+        'postfix_pkg': 'postfix',
+    },
+}) %}

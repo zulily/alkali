@@ -1,0 +1,12 @@
+# This file is managed by salt. Manual changes risk being overwritten.
+#
+# /etc/aliases
+#
+# See man 5 aliases for format
+
+{% for alias in pillar['aliases'] %}
+  {%- for name, recipients in alias.iteritems() -%}
+    {{ name }}: {% for recipient in recipients %}{{ recipient }}{% if not loop.last %}, {% endif %}{% endfor %}
+  {%- endfor %}
+{% endfor %}
+
